@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=1920, user-scalable=no">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <title>Los Estructurados</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: url('https://images8.alphacoders.com/133/thumb-1920-1336966.jpeg') center/cover no-repeat;
+            background-color: #0B0C10; /* Fondo oscuro */
+            color: #C5C6C7; /* Texto gris */
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1); /* Transparent overlay */
+            backdrop-filter: blur(10px);
+            z-index: -1; /* Behind content */
+        }
+
+        /* Container */
+        .container {
+            background: rgba(17, 17, 17, 0.9); /* Fondo translúcido */
+            color: #C5C6C7;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            text-align: justify;
+            max-width: 1020px;
+            margin: 0; /* Centrado vertical y horizontal */
+        }
+
+        /* New Content Text Container */
+        .content-text {
+            max-width: 500px; /* Max width for text content */
+            margin: 0; /* Centers the text inside the content */
+        }
+
+        /* Input and Label Styles */
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], textarea {
+            width: 50%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        textarea {
+            width: 77%;
+    padding: 10px;
+    margin: 10px 0 20px; /* Agrega un margen inferior más grande */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+    height: 100px;
+        }
+
+        button {
+            background: transparent;
+            border: 2px solid #66FCF1;
+            color: #66FCF1;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            font-weight: bold;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 20px; /* Espacio entre el botón y el área de texto */
+        }
+        button:hover {
+            background: #66FCF1;
+            color: #0B0C10;
+        }
+        .button-container {
+    margin-top: 20px;
+}
+
+
+        /* Output Box */
+        .output {
+            margin-top: 20px;
+            padding: 15px;
+            font-size: 1.2rem;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border-radius: 5px;
+        }
+
+        /* Content Text Style */
+        ul, li {
+            color: #dad54f;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #C5C6C7;
+        }
+
+        /* Code Style */
+        pre {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(18, 59, 88, 0.7); /* Black with transparency */
+            color: #ffffff;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: "Courier New", Courier, monospace;
+            /*background: rgba(0, 0, 0, 0.6); /* Black with transparency */
+            color: #ffffff;
+            padding: 3px 5px;
+            border-radius: 3px;
+        }
+
+        mini_code {
+            font-family: "Courier New", Courier, monospace;
+            background: rgba(18, 59, 88, 0.7); /* Black with transparency */
+            color: #ffffff;
+            padding: 3px 5px;
+            border-radius: 3px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 220px;
+            background-color: #3227A7;
+            color: white;
+            padding: 20px;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            height: 100%;
+            right: 0;
+            top: 0;
+        }
+        .sidebar h2 {
+            margin-top: 0;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            margin: 15px 0;
+        }
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .sidebar ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer Section */
+        .creators-section {
+            position: relative;
+            bottom: 0;
+            left: 0;
+            width: 96%;
+            background-color: rgb(117, 118, 121);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .fixed-container {
+            width: 1920px;
+            height: 1080px;
+            margin: 0 auto;
+            position: relative;
+            overflow: auto; /* Oculta contenido fuera del contenedor */
+            background-color: #f0f0f0; /* Opcional: color de fondo para pruebas */
+        }
+
+        .fixed-container * {
+            max-width: 100%;
+            max-height: 100%;
+            box-sizing: border-box;
+        }
+
+        .creators-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        h3 {
+            color: #66FCF1;
+        }
+        h4 {
+            color: #FC15EF;
+        }
+
+        h1 {
+            font-size: 4rem;
+            color: #66FCF1; /* Cian vibrante */
+            text-transform: uppercase;
+            text-align: center;
+            margin: 50px 0;
+        }
+    </style>
+</head>
+<body>
+    <!--<div class="fixed-container"> -->
+        <div class="container">
+            <h1>Los estructurados</h1>
+            <h2>Hecho por: Bruno Tarango, Ricardo Villalobos, Angel Oliva</h2>
+            <div class="BlackBox">
+                <iframe src="https://www.blackbox.ai" width="85%" height="450px" frameborder="0"></iframe>
+            </div>
+            <form id="topicForm">
+                <label for="topic">Enter a topic:</label>
+                <input type="text" id="topic" name="topic" placeholder="E.g., Explain sorting structures" required>
+                <label for="details">Additional Details (optional):</label>
+                <textarea id="details" name="details" placeholder="E.g., A specific structure."></textarea>
+                <button type="submit">Generate Information</button>
+            </form>
+            <div class="output" id="output" style="display:none;">
+                <h3>Generated Information:</h3>
+                <p id="response"></p>
+            </div>
+
+            <!-- Sections -->
+            <div class="section" id="section1">
+                <h2>1. Introducción a las Estructuras de Datos y Técnicas de Búsqueda</h2>
+                <p>Las estructuras de datos son formas de organizar, gestionar y almacenar datos para realizar </p>
+                <p>operaciones de manera eficiente. Se dividen en:</p>
+                <ul>
+                    <li><b>Estáticas:</b> Su tamaño se define al momento de la compilación (e.g., arreglos).</li>
+                    <li><b>Dinámicas:</b> Pueden crecer o disminuir durante la ejecución (e.g., listas enlazadas).</li>
+                </ul>
+                <b>Las operaciones comunes incluyen:</b>
+                <ul>
+                    <li><b>Inserción:</b> Añadir elementos.</li>
+                    <li><b>Eliminación:</b> Remover elementos.</li>
+                    <li><b>Búsqueda:</b> Encontrar elementos específicos.</li>
+                    <li><b>Actualización:</b> Modificar valores almacenados.</li>
+                </ul>
+                <b>Técnicas de búsqueda:</b>
+                <p>Son métodos para encontrar elementos dentro de una estructura de datos. Las más comunes incluyen:</p>
+                <ul>
+                    <li><b>Búsqueda Lineal:</b> Recorre todos los elementos hasta encontrar el valor buscado.</li>
+                    <li><b>Búsqueda Binaria:</b> Utilizada en estructuras ordenadas, divide el conjunto de datos a la mitad de manera repetitiva.</li>
+                    <li><b>Búsqueda en Grafos:</b> Utiliza algoritmos como BFS (Búsqueda en amplitud) o DFS (Búsqueda en profundidad).</li>
+                </ul>
+            </div>
+            
+            <!-- Memory Management in C -->
+            <div class="section" id="section2">
+                <h2>2. Gestión de Memoria en C</h2>
+                <p>El lenguaje C proporciona herramientas para manejar la memoria de manera manual, lo que </p>
+                <p>otorga gran flexibilidad pero requiere de una correcta gestión. La gestión de memoria implica </p>
+                <p>la asignación y liberación de memoria durante la ejecución del programa.</p>
+            
+                <!-- Subsection: Built-in Data Types and Control Statements -->
+                <h3>Tipos de Datos Incorporados y Sentencias de Control</h3>
+                <p>Los tipos de datos incorporados en C incluyen enteros, caracteres, flotantes, y más. </p>
+                <p>Las sentencias de control permiten ejecutar bloques de código bajo ciertas condiciones, como:</p>
+                <p><mini_code>if</mini_code>, <mini_code>else</mini_code>, <mini_code>switch</mini_code>, y bucles como <mini_code>for</mini_code> y <mini_code>while</mini_code>.</p>
+            
+                <!-- Subsection: Functions -->
+                <h3>Funciones</h3>
+                <p>Las funciones en C permiten dividir un programa en bloques más pequeños y reutilizables.</p>
+                <p>Una función puede ser definida por el usuario o ser parte de las bibliotecas estándar de C.</p>
+            
+                <!-- Subsection: Pointers -->
+                <h3>Punteros</h3>
+                <p>Los punteros son variables que almacenan direcciones de memoria. Son fundamentales para la </p>
+                <p>manipulación eficiente de datos y estructuras, así como para la gestión dinámica de memoria.</p>
+
+                <h3>Segmentos de Memoria</h3>
+                <p>En C, la gestión de memoria se realiza a través de tres segmentos principales:</p>
+                <ul>
+                    <li><strong>Memoria Estática:</strong> Espacio reservado al compilar. Las variables globales y estáticas se almacenan aquí.</li>
+                    <li><strong>Memoria Stack (pila):</strong> Almacena variables locales y se libera automáticamente al salir del alcance.</li>
+                    <li><strong>Memoria Heap (montículo):</strong> Espacio reservado dinámicamente con funciones como: </li>
+                    <li><mini_code>malloc()</mini_code>, <mini_code>calloc()</mini_code> o <mini_code>realloc()</mini_code>. Debe liberarse manualmente con <mini_code>free()</mini_code>.</li>
+                </ul>
+            
+                <h3>Problemas Comunes</h3>
+                <ul>
+                    <li><strong>Fugas de memoria:</strong> Ocurren cuando no se libera la memoria.</li>
+                    <li><strong>Double free:</strong> Intentar liberar un bloque de memoria dos veces.</li>
+                    <li><strong>Acceso a memoria no inicializada:</strong> Usar memoria antes de asignarle un valor.</li>
+                </ul>
+            </div>
+            
+            <!-- Static Data Structures -->
+            <div class="section" id="section3">
+                <h2>3. Estructuras de Datos Estáticas</h2>
+                <h3>Definición</h3>
+                <p>Son estructuras con tamaño fijo, definido al momento de la compilación. Ejemplos comunes incluyen:</p>
+                        
+                <!-- Subsection: Arrays -->
+                <h4>Arreglos</h3>
+                <p>Un arreglo es una estructura de datos que almacena un conjunto de elementos del mismo tipo.</p>
+                <p>La posición de cada elemento se define por un índice.</p>
+
+                <h4>Matrices</h3>
+                <p>Arreglos bidimensionales o multidimensionales.</p>
+        
+                <!-- Subsection: Stacks -->
+                <h4>Pilas</h3>
+                <p>Una pila es una estructura de datos en la que el último elemento en entrar es el primero en salir (FIFO). </p>
+                <p>Se utiliza en problemas de retroceso, como la evaluación de expresiones o la navegación por el sistema </p>
+                <p>de archivos.</p>
+            
+                <!-- Subsection: Queues -->
+                <h4>Colas</h3>
+                <p>Una cola sigue el principio FIFO (First In, First Out), donde el primer elemento en entrar es el primero </p>
+                <p>en salir. Se usa en la gestión de tareas en sistemas operativos y procesamiento de datos.</p>
+            
+                <h3>Ventajas y Desventajas</h3>
+                <ul>
+                    <li><strong>Ventajas:</strong>
+                        <ul>
+                            <li>Fácil acceso mediante índices.</li>
+                            <li>Menor complejidad en la gestión de memoria.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Desventajas:</strong>
+                        <ul>
+                            <li>Falta de flexibilidad para crecer o decrecer.</li>
+                            <li>Derroche de memoria si no se utilizan completamente.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>Las estructuras de datos estáticas son aquellas cuya memoria es preasignada y no cambia durante </p>
+                <p>la ejecución del programa. Esto incluye arreglos, pilas y colas.</p>
+            </div>
+            
+            <!-- Dynamic Data Structures -->
+            <div class="section" id="section4">
+                <h2>4. Estructuras de Datos Dinámicas</h2>
+                <p>Las estructuras de datos dinámicas pueden cambiar de tamaño durante la ejecución del programa. </p>
+                <p>Son más flexibles que las estáticas y permiten una utilización eficiente de la memoria.</p>
+
+                <h3>Ventajas y Desventajas</h3>
+                <ul>
+                    <li><strong>Ventajas:</strong>
+                        <ul>
+                            <li>Mayor flexibilidad.</li>
+                            <li>Uso eficiente de la memoria.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Desventajas:</strong>
+                        <ul>
+                            <li>Complejidad en la implementación.</li>
+                            <li>Mayor riesgo de errores como fugas de memoria.</li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <!-- Subsection: Linked List -->
+                <h3>Lista Enlazada</h3>
+                <p>Una lista enlazada es una secuencia de nodos, donde cada nodo contiene un dato y una referencia </p>
+                <p>al siguiente nodo. Permite inserciones y eliminaciones rápidas.</p>
+            
+                <!-- Subsection: Circular Linked List -->
+                <h3>Lista Enlazada Circular</h3>
+                <p>Es una variante de la lista enlazada donde el último nodo apunta al primer nodo, formando un ciclo.</p>
+            
+                <!-- Subsection: Doubly Linked List -->
+                <h3>Lista Doblemente Enlazada</h3>
+                <p>En una lista doblemente enlazada, cada nodo tiene dos referencias: una al siguiente nodo </p>
+                <p>y otra al nodo anterior, lo que permite una navegación en ambas direcciones.</p>
+            
+                <!-- Subsection: Graphs and Trees -->
+                <h3>Grafos y Árboles</h3>
+                <p>Los grafos son estructuras que representan relaciones entre objetos, mientras que los árboles</p>
+                <p>son un tipo especial de grafo con una jerarquía de nodos.</p>
+            
+                <!-- Subsubsection: Basic Graph Theory -->
+                <h4>Teoría Básica de Grafos</h4>
+                <p>Un grafo consta de un conjunto de vértices (nodos) y un conjunto de aristas (conexiones). </p>
+                <p>Los grafos pueden ser dirigidos o no dirigidos, ponderados o no ponderados.</p>
+            
+                <!-- Subsubsection: Binary Trees -->
+                <h4>Árboles Binarios</h4>
+                <p>Un árbol binario es una estructura jerárquica donde cada nodo tiene a lo mucho dos hijos. </p>
+                Se utilizan en aplicaciones como la búsqueda binaria y los árboles de decisión.</p>
+            
+                <!-- Subsubsection: AVL Trees -->
+                <h4>Árboles AVL</h4>
+                <p>Los árboles AVL son un tipo de árbol binario de búsqueda que mantiene el equilibrio en su altura, </p>
+                garantizando que las operaciones de búsqueda, inserción y eliminación se realicen en tiempo logarítmico.</p>
+            </div>
+            <div class="section" id="section5">
+                <h2>5. Estructuras de ordenamiento</h2>
+            
+                <h3>Bubble Sort</h3>
+                <p>Bubble sort es un algoritmo de ordenamiento simple que compara elementos adyacentes en una lista y los</p>
+                <p>intercambia si están en el orden incorrecto. Este proceso se repite hasta que la lista esté </p>
+                <p>completamente ordenada.</p>
+                <ul>
+                    <li><strong>Ventajas:</strong> Es fácil de entender e implementar. Útil para listas pequeñas.</li>
+                    <li><strong>Desventajas:</strong> Ineficiente para listas grandes debido a su complejidad temporal de <mini_code>O(n²)</mini_code>.</li>
+                </ul>
+                <pre><code>
+            void bubbleSort(int arr[], int size) {
+                for (int i = 0; i < size - 1; i++) {
+                    for (int j = 0; j < size - i - 1; j++) {
+                        if (arr[j] > arr[j + 1]) {
+                            int temp = arr[j];
+                            arr[j] = arr[j + 1];
+                            arr[j + 1] = temp;
+                        }
+                    }
+                }
+            }
+                </code></pre>
+            
+                <h3>Merge Sort</h3>
+                <p>Merge sort es un algoritmo de ordenamiento por división y conquista que divide la lista en mitades, ordena </p>
+                <p>cada mitad recursivamente y luego las fusiona. Tiene una complejidad temporal de <mini_code>O(n log n)</mini_code>.</p>
+                <ul>
+                    <li><strong>Ventajas:</strong> Eficiente para listas grandes y su rendimiento es constante.</li>
+                    <li><strong>Desventajas:</strong> Consume más memoria debido a las llamadas recursivas.</li>
+                </ul>
+                <pre><code>
+            // Pseudocódigo
+            Divide la lista en dos mitades.
+            Llama recursivamente a Merge Sort en ambas mitades.
+            Fusiona las mitades ordenadas.
+                </code></pre>
+            
+                <h3>Quicksort</h3>
+                <p>Quicksort selecciona un "pivote", reorganiza los elementos para que los menores estén antes del pivote</p>
+                <p>y los mayores después, y aplica el mismo proceso recursivamente a las sublistas.</p>
+                <ul>
+                    <li><strong>Ventajas:</strong> Muy rápido en promedio (<mini_code>O(n log n)</mini_code>) y eficiente en memoria.</li>
+                    <li><strong>Desventajas:</strong> Su rendimiento cae a <mini_code>O(n²)</mini_code> en el peor caso si no se elige bien el pivote.</li>
+                </ul>
+            </div>
+            
+            <div class="section" id="section6">
+                <h2>6. Estructuras de búsqueda</h2>
+            
+                <h3>Sequential Search</h3>
+                <p>También conocido como búsqueda lineal, consiste en recorrer cada elemento de la lista hasta encontrar el</p>
+                <p>valor buscado o llegar al final.</p>
+                <ul>
+                    <li><strong>Complejidad temporal:</strong> <mini_code>O(n)</mini_code>.</li>
+                    <li><strong>Uso:</strong> Ideal para listas no ordenadas.</li>
+                </ul>
+                <pre><code>
+            int sequentialSearch(int arr[], int n, int x) {
+                for (int i = 0; i < n; i++) {
+                    if (arr[i] == x) return i;
+                }
+                return -1;
+            }
+                </code></pre>
+            
+                <h3>Binary Search</h3>
+                <p>Este método divide el espacio de búsqueda en mitades iterativamente. Funciona solo en listas ordenadas.</p>
+                <ul>
+                    <li><strong>Complejidad temporal:</strong> <mini_code>O(log n)</mini_code>.</li>
+                    <li><strong>Ventajas:</strong> Rápido para listas grandes.</li>
+                </ul>
+                <pre><code>
+            int binarySearch(int arr[], int left, int right, int x) {
+                while (left <= right) {
+                    int mid = left + (right - left) / 2;
+                    if (arr[mid] == x) return mid;
+                    if (arr[mid] < x) left = mid + 1;
+                    else right = mid - 1;
+                }
+                return -1;
+            }
+                </code></pre>
+            
+                <h3>Tree Search</h3>
+                <p>Este método se basa en estructuras de árboles, como árboles binarios de búsqueda (BST). </p>
+                <p>Cada nodo contiene un valor, y los valores menores están en el subárbol izquierdo, mientras
+                <p>que los mayores están en el subárbol derecho.</p>
+                <ul>
+                    <li><strong>Complejidad temporal:</strong> <mini_code>O(log n)</mini_code> en promedio, <mini_code>O(n)</mini_code> en el peor caso (árbol desbalanceado).</li>
+                    <li><strong>Ventajas:</strong> Eficiente para grandes conjuntos de datos dinámicos.</li>
+                </ul>
+            </div>
+            <div class="code-try" id = "codeTry">
+                <h2>Compilador en C</h2>
+                <div id="editor" style="height: 400px; width: 100%; margin-bottom: 20px;"></div>
+                <button id="runCode" style="margin-right: 10px;">Run Code</button>
+                <button id="clearConsole">Clear Console</button>
+                <div id="console" style="height: 150px; background-color: #000; color: #0f0; padding: 10px; overflow-y: auto; margin-top: 20px;"></div>
+            </div>
+
+            <div class="code-compilation">
+                <iframe src="https://www.onlinegdb.com" width="85%" height="450px" frameborder="0"></iframe>
+            </div>
+        
+            <div class="creators-section">
+                <h3>Conoce a los pibes</h3>
+                <img src="images/creadores.png" alt="Creators" class="creators-image">
+            </div>
+            <div class="Grrrrr">
+                <img src="images/Dinosaur.jpg" alt="Creators" class="creators-image">
+            </div>
+            
+
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Topics</h2>
+            <ul>
+                <li><a href="#section1">1. Introducción a las Estructuras de Datos y Técnicas de Búsqueda</a></li>
+                <li><a href="#section2">2. Gestión de Memoria en C</a></li>
+                <li><a href="#section3">3. Estructuras de Datos Estáticas</a></li>
+                <li><a href="#section4">4. Estructuras de Datos Dinámicas</a></li>
+                <li><a href="#section5">5. Estructuras de ordenamiento</a></li>
+                <li><a href="#section6">6. Estructuras de búsqueda</a></li>
+                <li><a href="#codeTry">7. Compilador en C</a></li> <!-- New link for the "Try your code" section -->
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        async function fetchAIResponse(topic, details) {
+            try {
+                const response = await fetch('http://localhost:5000/generate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ topic, details })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Error communicating with the backend.');
+                }
+
+                const data = await response.json();
+                return data.message;
+            } catch (error) {
+                return `Error: ${error.message}`;
+            }
+        }
+
+        document.getElementById('topicForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const topic = document.getElementById('topic').value;
+            const details = document.getElementById('details').value;
+            const outputDiv = document.getElementById('output');
+            const responseDiv = document.getElementById('response');
+
+            outputDiv.style.display = 'block';
+            responseDiv.textContent = "Generating content, please wait...";
+
+            const response = await fetchAIResponse(topic, details);
+            responseDiv.textContent = response;
+        });
+
+
+    </script>
+
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.14/ace.js"></script>
+    <script>
+        // Initialize Ace Editor
+        const editor = ace.edit("editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.session.setMode("ace/mode/c_cpp");
+        editor.setValue(`#include <stdio.h>\n\nint main() {\n    printf("Hello, World!\\n");\n    return 0;\n}`);
+
+        // Select elements
+        const runButton = document.getElementById("runCode");
+        const clearButton = document.getElementById("clearConsole");
+        const consoleOutput = document.getElementById("console");
+
+        // Event listener to run code
+        runButton.addEventListener("click", async () => {
+            const code = editor.getValue();
+
+            // Simulating backend communication
+            try {
+                const response = await fetch("http://localhost:3000/run", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ code }),
+                });
+
+                if (response.ok) {
+                    const output = await response.text();
+                    consoleOutput.innerHTML += `> ${output}\n`;
+                } else {
+                    consoleOutput.innerHTML += "> Error: Unable to execute code.\n";
+                }
+            } catch (error) {
+                consoleOutput.innerHTML += `> Error: ${error.message}\n`;
+            }
+        });
+
+        // Event listener to clear console
+        clearButton.addEventListener("click", () => {
+            consoleOutput.innerHTML = "";
+        });
+    </script>
+    </body>
+    
+</html>
