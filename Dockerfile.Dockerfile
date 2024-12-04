@@ -1,4 +1,3 @@
-Dockerfile
 # Usa una imagen base con un servidor web ligero
 FROM nginx:alpine
 
